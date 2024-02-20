@@ -1,5 +1,9 @@
+// contraseña : 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
+
 function contrasenaValida(contrasena){
-    if(contrasena === "2Fj(jjbFsuj" || contrasena === "eoZiugBf&g9"){
+    if(contrasena === ""){
+      return false;
+    }else if(contrasena === "2Fj(jjbFsuj" || contrasena === "eoZiugBf&g9"){
         return true;
     }else{
         return false;
@@ -12,7 +16,7 @@ function contrasenaValida(contrasena){
 console.log(contrasenaValida("2Fj(jjbFsuj")) // true
 console.log(contrasenaValida("eoZiugBf&g9")) // true
 console.log(contrasenaValida("hola")) // false
-//console.log(contrasenaValuda("")) // false
+console.log(contrasenaValida("")) // false
 
 
 function calcularImpuestos(edad , ingresos){
@@ -59,7 +63,7 @@ console.log(bmi(72, 1.6)) // "Sobrepeso"
 console.log(bmi(52, 1.75)) //  "Bajo de peso"
 console.log(bmi(135, 1.7)) // "Obeso"
 
- let array = [1,2,3,"perro","gato","yo123"]
+
 
 let imprimirArreglo  = (...args) =>{
   for(let dato of args){
