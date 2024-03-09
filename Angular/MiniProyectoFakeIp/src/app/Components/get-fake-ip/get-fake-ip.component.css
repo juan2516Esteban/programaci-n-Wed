@@ -1,0 +1,6 @@
+.Title-Center{
+    text-align: center; /* Con esto centramos un texto */
+    color: black;
+    font-size: 45px; /* Con esto modificamos el tamaño de la fuente */
+}
+

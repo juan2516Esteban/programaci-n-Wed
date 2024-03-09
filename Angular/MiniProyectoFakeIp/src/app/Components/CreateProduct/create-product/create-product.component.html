@@ -1,0 +1,22 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PrimeraVista</title>
+</head>
+<body>
+    <form [formGroup] = "formProduct" (ngSubmit)="CreateProduct()">
+        <samp>Nombre del Producto</samp>
+        <input type="text" formControlName="title">
+        <samp>Precio</samp>
+        <input type="number" formControlName="price">
+        <samp>Descripción</samp>
+        <input type="text" formControlName="description">
+        <samp>Categoría Id</samp>
+        <input type="text" formControlName="categoryId">
+        <samp>Imágenes</samp>
+        <input type="url" formControlName="images">
+        <button type="submit" [disabled]="formProduct.invalid" class="bg-lime-600 cursor-pointer">Crear Producto</button>
+    </form>
+</body>
+</html>
