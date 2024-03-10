@@ -18,9 +18,9 @@
       <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-teal-500 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         <article 
         class="flex max-w-xl flex-col items-start justify-between p-8 rounded-xl  bg-orange-500 ml-0.5" 
-        *ngFor="let item of data">
+        *ngFor="let item of data.slice(imagesControlFirts,imagesControlEnd)">
           <div class="flex items-center gap-x-4 text-xs">
-            <time class="text-gray-500">Precio ${{item.price | currency:""}} USD</time>
+            <time class="text-gray-500">Precio {{item.price | currency:'':'symbol':'1.0-0'}} COP</time>
             <a href="#" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-green-600">Buy</a>
           </div>
           <div class="group relative">
@@ -52,6 +52,7 @@
     </div>
   </div>
 
+  <button (click)="Paginator()">paginator1</button>
 </body>
 
 </html>

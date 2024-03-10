@@ -14,11 +14,22 @@ export class FakeIpService {
   public urlIpFake: any = environment.UrlFakeIpProducts;
 
   /*creamos un metodo para obtener los productos por medio de JSON*/
-  public odtenerProductos() {
-    return this.http.get(`${this.urlIpFake}?offset=30&limit=20`);
+  public odtenerProductos(
+    imagesControlFirts: number,
+    imagesControlEnd: number
+  ) {
+    return this.http.get(
+      `${this.urlIpFake}?offset=${imagesControlFirts}&limit=${imagesControlEnd}`
+    );
   }
 
+  /* Creamos el Servicio para Crear un Producto */
   public CreateProduct(body: any) {
-    return this.http.post(this.urlIpFake, body);
+    return this.http.post(`${this.urlIpFake}`, body);
+  }
+
+  /* Creamos el Servicio para actualizar el Producto por medio de un ID y un BODY */
+  public UpdateProduct(body: any, id: any) {
+    return this.http.put(`${this.urlIpFake}/${id}`, body);
   }
 }

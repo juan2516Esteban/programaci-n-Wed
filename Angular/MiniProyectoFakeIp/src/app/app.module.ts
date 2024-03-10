@@ -8,9 +8,16 @@ import { AppComponent } from './app.component';
 import { GetFakeIpComponent } from './Components/get-fake-ip/get-fake-ip.component';
 import { CreateProductComponent } from './Components/CreateProduct/create-product/create-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
 
 @NgModule({
-  declarations: [AppComponent, GetFakeIpComponent, CreateProductComponent],
+  declarations: [
+    AppComponent,
+    GetFakeIpComponent,
+    CreateProductComponent,
+    ActualizarProductoComponent,
+    ActualizarProductoComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

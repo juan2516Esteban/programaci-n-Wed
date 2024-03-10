@@ -23,27 +23,28 @@ export class GetFakeIpComponent {
 
   public data: any[] = [];
   public indice: number = 0;
+  public imagesControlFirts: number = 0;
+  public imagesControlEnd: number = 6;
 
   public odtenerProductos() {
-    this.service.odtenerProductos().subscribe((data: any) => {
-      this.data = Array.from(data);
-      console.log(this.data);
-      this.data.map((item: any) => {
-        let imageStringify = JSON.stringify(item.images); // convertimos el array de imagenes a string
-        let imageNoGarbage = imageStringify
-          .substring(2, imageStringify.length - 2)
-          .replaceAll('\\', ' ')
-          .replaceAll('""', '"')
-          .replaceAll('" "', '"');
-        console.log(imageNoGarbage);
-        try {
-          item.images = JSON.parse(imageNoGarbage);
-          item.imagesActual = item.images[0];
-        } catch (e) {
-          console.log(e);
-        }
+    this.service
+      // Estos dos atributos son los que se envian al servicio para paginar los productos
+      .odtenerProductos(this.imagesControlFirts, this.imagesControlEnd)
+      .subscribe((data: any) => {
+        this.data = Array.from(data);
+        this.data.map((item: any) => {
+          let imageStringify = JSON.stringify(item.images); // convertimos el array de imagenes a string
+          let imageNoGarbage = imageStringify
+            .substring(2, imageStringify.length - 2)
+            .replaceAll('\\', ' ')
+            .replaceAll('""', '"')
+            .replaceAll('" "', '"');
+          try {
+            item.images = JSON.parse(imageNoGarbage);
+            item.imagesActual = item.images[0];
+          } catch (e) {}
+        });
       });
-    });
   }
 
   cambiarVariable() {
@@ -53,5 +54,12 @@ export class GetFakeIpComponent {
       let longitud: number = item.images.length;
       item.imagesActual = item.images[this.indice % longitud];
     });
+  }
+
+  public Paginator() {
+    this.imagesControlFirts = this.imagesControlEnd;
+    this.imagesControlEnd += 6;
+    this.odtenerProductos();
+    console.log(this.imagesControlFirts, this.imagesControlEnd);
   }
 }
