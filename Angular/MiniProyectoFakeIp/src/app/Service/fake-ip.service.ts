@@ -14,13 +14,8 @@ export class FakeIpService {
   public urlIpFake: any = environment.UrlFakeIpProducts;
 
   /*creamos un metodo para obtener los productos por medio de JSON*/
-  public odtenerProductos(
-    imagesControlFirts: number,
-    imagesControlEnd: number
-  ) {
-    return this.http.get(
-      `${this.urlIpFake}?offset=${imagesControlFirts}&limit=${imagesControlEnd}`
-    );
+  public odtenerProductos() {
+    return this.http.get(`${this.urlIpFake}`);
   }
 
   /* Creamos el Servicio para Crear un Producto */

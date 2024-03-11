@@ -13,6 +13,8 @@ export class GetFakeIpComponent {
   FakeIpService*/
   constructor(private service: FakeIpService) {}
 
+  public data: any[] = [];
+
   ngOnInit(): void {
     this.odtenerProductos();
 
@@ -21,15 +23,16 @@ export class GetFakeIpComponent {
     });
   }
 
-  public data: any[] = [];
+  data2: any = [];
   public indice: number = 0;
   public imagesControlFirts: number = 0;
-  public imagesControlEnd: number = 6;
+  public imagesControlEnd: number = 3;
+  public ControlPaginator: boolean = false;
 
   public odtenerProductos() {
     this.service
       // Estos dos atributos son los que se envian al servicio para paginar los productos
-      .odtenerProductos(this.imagesControlFirts, this.imagesControlEnd)
+      .odtenerProductos()
       .subscribe((data: any) => {
         this.data = Array.from(data);
         this.data.map((item: any) => {
@@ -49,17 +52,21 @@ export class GetFakeIpComponent {
 
   cambiarVariable() {
     this.indice++;
-
     this.data.map((item: any) => {
       let longitud: number = item.images.length;
       item.imagesActual = item.images[this.indice % longitud];
     });
   }
 
-  public Paginator() {
+  public PaginatorAvanzar() {
+    console.log(this.data.length);
     this.imagesControlFirts = this.imagesControlEnd;
-    this.imagesControlEnd += 6;
-    this.odtenerProductos();
-    console.log(this.imagesControlFirts, this.imagesControlEnd);
+    this.imagesControlEnd += 3;
+    console.log(this.data[this.imagesControlFirts - 1]);
+    if (this.data[this.imagesControlEnd - 1] == undefined) {
+      this.ControlPaginator = true;
+    } else {
+      this.odtenerProductos();
+    }
   }
 }
