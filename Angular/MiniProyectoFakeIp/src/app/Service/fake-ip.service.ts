@@ -27,4 +27,8 @@ export class FakeIpService {
   public UpdateProduct(body: any, id: any) {
     return this.http.put(`${this.urlIpFake}/${id}`, body);
   }
+
+  public DeleteProduct(id: any) {
+    return this.http.delete(`${this.urlIpFake}/${id}`);
+  }
 }

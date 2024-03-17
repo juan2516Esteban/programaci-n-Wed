@@ -1,22 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="bg-slate-700 Contenedor">
+<h1>Crear Productos</h1>
+      <form class="example-form"  [formGroup] = "formProduct" (ngSubmit)="CreateProduct()">
+        
+        <mat-form-field class="example-full-width">
 
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>PrimeraVista</title>
-</head>
-<body>
-    <form [formGroup] = "formProduct" (ngSubmit)="CreateProduct()">
-        <samp>Nombre del Producto</samp>
-        <input type="text" formControlName="title">
-        <samp>Precio</samp>
-        <input type="number" formControlName="price">
-        <samp>Descripción</samp>
-        <input type="text" formControlName="description">
-        <samp>Categoría Id</samp>
-        <input type="text" formControlName="categoryId">
-        <samp>Imágenes</samp>
-        <input type="url" formControlName="images">
-        <button type="submit" [disabled]="formProduct.invalid" class="bg-lime-600 cursor-pointer">Crear Producto</button>
-    </form>
-</body>
-</html>
+          <mat-label>Nombre del producto</mat-label>
+          <input matInput placeholder="Name Product" formControlName="title" type="text">
+
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Price" type="number" formControlName="price">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Descripción</mat-label>
+          <input matInput placeholder="description" type="text" formControlName="description">
+        </mat-form-field>  
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Categoría</mat-label>
+          <input matInput placeholder="Category" type="text" formControlName="categoryId">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Imágenes</mat-label>
+          <input matInput placeholder="images" type="url" formControlName="images">
+        </mat-form-field>
+
+          <button type="submit" [disabled]="formProduct.invalid" [ngClass]="{falso: formProduct.invalid}">Crear Producto</button>
+        
+      </form>
+</div>

@@ -13,8 +13,6 @@ export class GetFakeIpComponent {
   FakeIpService*/
   constructor(private service: FakeIpService) {}
 
-  public data: any[] = [];
-
   ngOnInit(): void {
     this.odtenerProductos();
 
@@ -23,11 +21,12 @@ export class GetFakeIpComponent {
     });
   }
 
-  data2: any = [];
+  public data: any[] = [];
   public indice: number = 0;
   public imagesControlFirts: number = 0;
-  public imagesControlEnd: number = 3;
-  public ControlPaginator: boolean = false;
+  public imagesControlEnd: number = 0;
+  public ControlPaginatorAvanzar: boolean = false;
+  public ControlPaginatorRetroceder: boolean = true;
 
   public odtenerProductos() {
     this.service
@@ -35,6 +34,12 @@ export class GetFakeIpComponent {
       .odtenerProductos()
       .subscribe((data: any) => {
         this.data = Array.from(data);
+
+        if (this.imagesControlFirts == 0 && this.imagesControlEnd == 0) {
+          this.imagesControlFirts = data.length - 3;
+          this.imagesControlEnd = data.length;
+        }
+
         this.data.map((item: any) => {
           let imageStringify = JSON.stringify(item.images); // convertimos el array de imagenes a string
           let imageNoGarbage = imageStringify
@@ -59,12 +64,27 @@ export class GetFakeIpComponent {
   }
 
   public PaginatorAvanzar() {
-    console.log(this.data.length);
+    this.ControlPaginatorRetroceder = false;
+    this.imagesControlEnd = this.imagesControlFirts;
+    this.imagesControlFirts -= 3;
+    if (this.imagesControlFirts - 3 < 0 || this.imagesControlFirts - 3 == 0) {
+      this.imagesControlEnd = this.imagesControlFirts;
+      this.imagesControlFirts = 0;
+      this.odtenerProductos();
+      this.ControlPaginatorAvanzar = true;
+    } else {
+      this.odtenerProductos();
+    }
+  }
+
+  public PaginatorRetroceder() {
+    this.ControlPaginatorAvanzar = false;
     this.imagesControlFirts = this.imagesControlEnd;
     this.imagesControlEnd += 3;
-    console.log(this.data[this.imagesControlFirts - 1]);
-    if (this.data[this.imagesControlEnd - 1] == undefined) {
-      this.ControlPaginator = true;
+    if (this.imagesControlEnd + 3 > this.data.length) {
+      this.imagesControlEnd = this.data.length;
+      this.odtenerProductos();
+      this.ControlPaginatorRetroceder = true;
     } else {
       this.odtenerProductos();
     }

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PrimeraVista</title>
-</head>
-<body>
+
   <h1 class="Title-Center" >Fake IP</h1>
 
   <div class="py-24 sm:py-32 inline">
@@ -48,15 +42,15 @@
               <p class="text-gray-600">Publicado: {{item.creationAt}}</p>
             </div>
           </div>
+          <app-delete-product [idProduct]="item"></app-delete-product>
         </article>
       </div>
     </div>
   </div>
 
-  <button [disabled]="ControlPaginator" (click)="PaginatorAvanzar()">paginator1</button>
-</body>
+  <button [disabled]="ControlPaginatorAvanzar" (click)="PaginatorAvanzar()" class="block">paginator1</button>
+  <button [disabled]="ControlPaginatorRetroceder" (click)="PaginatorRetroceder()">paginator2</button>
 
-</html>
 
 <app-create-product></app-create-product>
 

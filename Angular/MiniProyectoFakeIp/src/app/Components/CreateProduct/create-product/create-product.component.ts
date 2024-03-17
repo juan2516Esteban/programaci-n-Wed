@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FakeIpService } from 'src/app/Service/fake-ip.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-product',
@@ -22,7 +23,16 @@ export class CreateProductComponent {
     };
 
     this.service.CreateProduct(body).subscribe((data: any) => {
-      console.log(data);
+      Swal.fire({
+        title: 'Se a creado exitosamente el producto',
+        icon: 'success',
+      }).then((result) => {
+        // Verifica si el usuario hizo clic en el botón "OK"
+        if (result.isConfirmed) {
+          // Recargar la página
+          window.location.reload();
+        }
+      });
     });
   }
 
