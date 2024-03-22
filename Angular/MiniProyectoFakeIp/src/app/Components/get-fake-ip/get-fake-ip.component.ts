@@ -22,6 +22,7 @@ export class GetFakeIpComponent {
   }
 
   public data: any[] = [];
+  public body: any = null;
   public indice: number = 0;
   public imagesControlFirts: number = 0;
   public imagesControlEnd: number = 0;
@@ -46,7 +47,8 @@ export class GetFakeIpComponent {
             .substring(2, imageStringify.length - 2)
             .replaceAll('\\', ' ')
             .replaceAll('""', '"')
-            .replaceAll('" "', '"');
+            .replaceAll('" "', '"')
+            .replaceAll(' ', '');
           try {
             item.images = JSON.parse(imageNoGarbage);
             item.imagesActual = item.images[0];
@@ -77,6 +79,15 @@ export class GetFakeIpComponent {
     }
   }
 
+  public scrollTo(elementId: string): void {
+    setTimeout(() => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  }
+
   public PaginatorRetroceder() {
     this.ControlPaginatorAvanzar = false;
     this.imagesControlFirts = this.imagesControlEnd;
@@ -88,5 +99,19 @@ export class GetFakeIpComponent {
     } else {
       this.odtenerProductos();
     }
+  }
+
+  fillbody(producto: any) {
+    this.body = null;
+    setTimeout(() => {
+      this.body = {
+        id: producto.id,
+        title: producto.title,
+        price: producto.price,
+        description: producto.description,
+        categoryId: producto.category.id,
+        images: producto.images[0],
+      };
+    }, 50);
   }
 }

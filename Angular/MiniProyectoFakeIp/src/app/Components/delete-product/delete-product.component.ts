@@ -22,6 +22,7 @@ export class DeleteProductComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
@@ -29,9 +30,12 @@ export class DeleteProductComponent {
           title: 'Eliminado exitosamente!',
           text: 'Tu producto ha sido eliminado.',
           icon: 'success',
-        });
-        this.service.DeleteProduct(id).subscribe((data: any) => {
-          window.location.reload();
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.service.DeleteProduct(id).subscribe((data: any) => {
+              window.location.reload();
+            });
+          }
         });
       }
     });
